@@ -7,7 +7,7 @@ if ! grep -Fq "xavier" /etc/hosts; then
 fi
 
 if ! grep -Fq "orin" /etc/hosts; then
-    echo -e "192.168.1.69\torin\n$(cat /etc/hosts)" > /etc/hosts
+    echo -e "192.168.1.23\torin\n$(cat /etc/hosts)" > /etc/hosts
 fi
 
 if ! grep -Fq "uwrt-dvl" /etc/hosts; then
