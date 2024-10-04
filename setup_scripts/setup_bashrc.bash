@@ -8,7 +8,7 @@ if [ -d ~/osu-uwrt/release ]; then
 
     cat >> ~/.bashrc << EOF
 if [ ! -f /tmp/source_this_boot ]; then
-    read -p "Setup bashrc for Release (R) or Development (D)? (default Development) " -n 1 -r
+    read -p "Setup bashrc for Release (R) or Development (D)? (default Development) " -r
     echo ""
 
     touch /tmp/source_this_boot
