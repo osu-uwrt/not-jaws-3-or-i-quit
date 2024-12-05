@@ -51,6 +51,32 @@ case "$CHOICE" in
 esac
 printf "\n\n\n"
 
+read -p "Install MATLAB? This will take approximately 15 additional minutes and use approximately 10 GB (default is no) " CHOICE
+case "$CHOICE" in
+    [yY]*) 
+        echo "Running MATLAB setup"
+        ~/osu-uwrt/riptide_setup/setup_scripts/matlab_install/install_matlab.bash
+        ;;
+
+    *) 
+        echo "Skipping MATLAB setup"
+        ;;
+esac
+printf "\n\n\n"
+
+# install controller packages
+echo "Installing most recent controller packages"
+# source ros first
+. /opt/ros/$ROS_DISTRO/setup.bash
+. ~/osu-uwrt/development/dependencies/install/setup.bash
+. ~/osu-uwrt/development/software/install/setup.bash
+ros2 run riptide_controllers2 model_manager.py -y clean_workspace
+ros2 run riptide_controllers2 model_manager.py -y download_packages --build
+
+#setup groot
+echo "Installing Groot"
+~/osu-uwrt/riptide_setup/setup_scripts/install_groot.bash
+
 # setup hosts and add hardware udev rules
 echo "Setting up hardware and hosts files"
 sudo ~/osu-uwrt/riptide_setup/setup_scripts/hardware/setup_hosts.bash

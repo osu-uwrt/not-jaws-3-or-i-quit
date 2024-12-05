@@ -8,8 +8,6 @@ echo "Starting ROSDEP"
 sudo rosdep init
 rosdep update
 
-# TODO query for new sim setup here
-
 echo "Importing repositories"
 vcs import < ~/osu-uwrt/riptide_setup/setup_scripts/dev_install/riptide.repos . --recursive
 vcs pull
@@ -49,9 +47,11 @@ echo "Downloading Pico utils"
 sudo apt install -y cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential
 
 # build development software (this should pass)
-echo "Building riptide software"
+echo "Building riptide_software"
 cd ~/osu-uwrt/development/software
 rosdep install --from-paths src --ignore-src --rosdistro $ROS_DISTRO -y -r
+sudo apt install -y libglfw3-dev #for the sim
+pip install transforms3d #for mapping
 source /opt/ros/$ROS_DISTRO/setup.bash
 source ~/osu-uwrt/development/dependencies/install/setup.bash
 colcon build
